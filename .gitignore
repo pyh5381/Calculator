@@ -1,1 +1,13 @@
 /.metadata/
+.metadata
+Calculator/bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+Calculator/.settings/
+.loadpath
+.recommenders
+Servers
