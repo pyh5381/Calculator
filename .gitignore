@@ -1,13 +1,12 @@
-/.metadata/
 .metadata
-Calculator/bin/
+bin/
 tmp/
 *.tmp
 *.bak
 *.swp
 *~.nib
 local.properties
-Calculator/.settings/
+.settings/
 .loadpath
 .recommenders
 Servers
