@@ -32,6 +32,7 @@ public class StandardPanel implements ActionListener, KeyListener {
             					 ,"1", "2", "3", "+"
             					 ,"+-", "0", ".", "=" };
 	
+	/*------------------ 전체 패널관련 설정 시작 ------------------*/
 	public StandardPanel(CalculatorGui calculator) {
 		/*---------- 결과물 출력을 위한 패널 설정 ----------*/
 		result.setFont(new Font("나눔", Font.BOLD, 30));
@@ -65,7 +66,10 @@ public class StandardPanel implements ActionListener, KeyListener {
 		calculator.addKeyListener(this);
 		calculator.add(btnPane, BorderLayout.CENTER);
 	}
+	/*------------------ 전체 패널관련 설정 끝 ------------------*/
 	
+	
+	/*------------------ 버튼 클릭 이벤트처리 ------------------*/
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String clickBtn = e.getActionCommand();
@@ -86,6 +90,7 @@ public class StandardPanel implements ActionListener, KeyListener {
 		/*--------- 그외에 다른 버튼 클릭시 처리 이벤트 ---------*/
 		if (clickBtn.equals("CE") || clickBtn.equals("C")) {
 			result.setText("0");
+			margin.setText("");
 		}
 		
 		switch (clickBtn) {
@@ -97,21 +102,54 @@ public class StandardPanel implements ActionListener, KeyListener {
 					result.setText("0");
 				}
 				break;
+				
 			case "+":
 				if (margin.getText() != "") {
 					margin.setText(margin.getText() + tmpResult + " + ");
-					check = true;
 				}
 				else {
 					margin.setText(tmpResult + " + ");
-					check = true;
 				}
+				check = true;
 				break;
+				
+			case "-":
+				if (margin.getText() != "") {
+					margin.setText(margin.getText() + tmpResult + " - ");
+				}
+				else {
+					margin.setText(tmpResult + " - ");
+				}
+				check = true;
+				break;
+			
+			case "/":
+				if (margin.getText() != "") {
+					margin.setText(margin.getText() + tmpResult + " / ");
+				}
+				else {
+					margin.setText(tmpResult + " / ");
+				}
+				check = true;
+				break;
+				
+			case "*":
+				if (margin.getText() != "") {
+					margin.setText(margin.getText() + tmpResult + " * ");
+				}
+				else {
+					margin.setText(tmpResult + " * ");
+				}
+				check = true;
+				break;
+				
 			default:
 				break;
 		}
 	}
 
+	
+	/*------------------ 키보드 입력 이벤트처리 ------------------*/
 	@Override
 	public void keyPressed(KeyEvent e) {
 		String pressBtn = KeyEvent.getKeyText(e.getKeyCode());
@@ -129,17 +167,44 @@ public class StandardPanel implements ActionListener, KeyListener {
 			}
 		}
 		
+		/*--------- 그외에 키보드 입력시 처리 이벤트 ---------*/
 		if (e.getKeyChar() == '+') {
 			if (margin.getText() != "") {
 				margin.setText(margin.getText() + tmpResult + " + ");
-				check = true;
 			}
 			else {
-				margin.setText(tmpResult + " + ");
-				check = true;				
+				margin.setText(tmpResult + " + ");			
 			}
+			check = true;
 		}
-		/*--------- 그외에 키보드 입력시 처리 이벤트 ---------*/
+		else if (e.getKeyChar() == '-') {
+			if (margin.getText() != "") {
+				margin.setText(margin.getText() + tmpResult + " - ");
+			}
+			else { 
+				margin.setText(tmpResult + " - "); 
+			}
+			check = true;
+		}
+		else if (e.getKeyChar() == '/') {
+			if (margin.getText() != "") {
+				margin.setText(margin.getText() + tmpResult + " / ");
+			}
+			else {
+				margin.setText(tmpResult + " / ");
+			}
+			check = true;
+		}
+		else if (e.getKeyChar() == '*') {
+			if (margin.getText() != "") {
+				margin.setText(margin.getText() + tmpResult + " * ");
+			}
+			else {
+				margin.setText(tmpResult + " * ");
+			}
+			check = true;
+		}
+		
 		switch (pressBtn) {
 			case "Backspace":
 				if (tmpResult.length() != 1) {
@@ -149,15 +214,22 @@ public class StandardPanel implements ActionListener, KeyListener {
 					result.setText("0");
 				}
 				break;
+				
+			case "Escape":
+				result.setText("0");
+				margin.setText("");
+				break;
+			
 			default:
 				break;
 		}
 		
 	}
 	
-	// 아래 2개 메소드는 사용하지 않음
+	/*------------------ 사용하지 않는 메소드 ------------------*/
 	@Override
 	public void keyTyped(KeyEvent e) { }
 	@Override
 	public void keyReleased(KeyEvent e) { }
+	/*------------------ 사용하지 않는 메소드 ------------------*/
 }
