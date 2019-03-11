@@ -142,7 +142,9 @@ public class StandardPanel implements ActionListener, KeyListener {
 				}
 				check = true;
 				break;
-				
+			
+			case "=":
+				com.result(margin, result);
 			default:
 				break;
 		}
@@ -219,7 +221,10 @@ public class StandardPanel implements ActionListener, KeyListener {
 				result.setText("0");
 				margin.setText("");
 				break;
-			
+			case "Enter":
+				com.result(margin, result);
+				break;
+				
 			default:
 				break;
 		}

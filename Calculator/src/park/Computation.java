@@ -2,22 +2,64 @@ package park;
 
 import java.text.DecimalFormat;
 
+import javax.swing.JLabel;
+
 public class Computation {
+	private long calResult = 0;
+	
 	public String add(String pre, String post) {
+		calResult = Long.parseLong(pre) + Long.parseLong(post);
 		
-		return null;
+		return digitNum(String.valueOf(calResult));
 	}
 	public String sub(String pre, String post) {
+		calResult = Long.parseLong(pre) - Long.parseLong(post);
 		
-		return null;
+		return digitNum(String.valueOf(calResult));
 	}
 	public String mul(String pre, String post) {
+		calResult = Long.parseLong(pre) * Long.parseLong(post);
 		
-		return null;
+		return digitNum(String.valueOf(calResult));
 	}
 	public String div(String pre, String post) {
+		calResult = Long.parseLong(pre) / Long.parseLong(post);
 		
-		return null;
+		return digitNum(String.valueOf(calResult));
+	}
+	
+	public void result(JLabel margin, JLabel result) {
+		String[] tmp;
+		String pre = margin.getText();
+		String post = result.getText();
+		
+		pre = pre.replaceAll(",", "");
+		post = post.replaceAll(",", "");
+		tmp = pre.split(" ");
+		
+		if (margin.getText() != "") {
+			switch (tmp[1]) {
+				case "+":
+					result.setText(add(tmp[0], post));
+					break;
+					
+				case "-":
+					result.setText(sub(tmp[0], post));
+					break;
+					
+				case "*":
+					result.setText(mul(tmp[0], post));
+					break;
+				case "/":
+					result.setText(div(tmp[0], post));
+					break;
+					
+				default:
+					break;
+			}
+		}
+		
+		margin.setText("");
 	}
 	
 	public String digitNum(String tmpResult) {
